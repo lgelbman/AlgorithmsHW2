@@ -14,23 +14,23 @@ class MyVector{
                 *(array2 + i) = *(array + i);
             }
             T* ptr = array;
-            array = array2;
+            this->array = array2;
             delete[] ptr;
-            currSize *= 2;
+            this->currSize *= 2;
         }
 
     public:
         MyVector() {
-            array = new T[STARTING_SIZE];
-            currSize = STARTING_SIZE;
-            currFilled = 0;
+            this->array = new T[STARTING_SIZE];
+            this->currSize = STARTING_SIZE;
+            this->currFilled = 0;
         }
 
         void add(T data) {
             if (currFilled < currSize) {
-                T* ptr = array + (currFilled );
+                T* ptr = this->array + this->currFilled;
                 *ptr = data;
-                currFilled++;
+                this->currFilled++;
             } else {
                 this->increaseArraySize();
                 add(data);
@@ -38,10 +38,10 @@ class MyVector{
         }
 
         T get(int index) {
-            if (currFilled * sizeof(T) < index) {
+            if (this->currFilled  < index) {
                 //out of bounds
             }
-            T* address = array + (index);
+            T* address = this->array + (index);
             T val = *address;
             return val;
         }
