@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MyVector.h"
+#include "LLIterator.h"
 
 using namespace std;
 
@@ -17,6 +18,19 @@ int main()
     for (int i = 0; i < 20; i++) {
         cout << vect.get(i) << endl;
     }
+
+    cout << "----------" << endl;
+
+    LLIterator<int> list;
+    for (int i = 0; i < 20; i++) {
+        list.add(i * i);
+    }
+
+    while (list.hasNext()){
+        int num = list.getNext();
+        cout << num << endl;
+    }
+
     
 
 
