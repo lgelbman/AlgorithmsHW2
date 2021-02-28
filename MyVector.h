@@ -26,10 +26,21 @@ class MyVector{
             this->currFilled = 0;
         }
 
-        void add(T data) {
+        void add(T& data) {
             if (currFilled < currSize) {
                 T* ptr = this->array + this->currFilled;
                 *ptr = data;
+                this->currFilled++;
+            } else {
+                this->increaseArraySize();
+                add(data);
+            }
+        }
+
+        void add(T&& data) {
+            if (currFilled < currSize) {
+                T* ptr = this->array + this->currFilled;
+                ptr = &data;
                 this->currFilled++;
             } else {
                 this->increaseArraySize();

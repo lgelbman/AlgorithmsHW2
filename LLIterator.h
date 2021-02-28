@@ -1,4 +1,5 @@
 #include "Node.h"
+#include <utility>
 
 template <class T>
 class LLIterator {
@@ -14,7 +15,7 @@ class LLIterator {
             current = 0;
         }
 
-        void add(T data) {
+        void add(T& data) {
             Node<T>* node = new Node<T>(data);
             if (first == 0) {
                 current = first = node;
@@ -30,6 +31,21 @@ class LLIterator {
             }
         }
 
+        void add(T&& data) {
+            Node<T>* node = new Node<T>(std::move(data));
+            if (first == 0) {
+                current = first = node;
+                return;
+            } 
+            Node<T>* ptr = first;
+            while (ptr != 0) {
+                if ((*ptr).next == 0) {
+                    (*ptr).next = node;
+                    return;
+                }
+                ptr = (*ptr).next;
+            }
+        }
 
         bool hasNext() {
             return current != 0;
